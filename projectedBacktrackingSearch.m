@@ -2,7 +2,7 @@ function [t] = projectedBacktrackingSearch(f, P, x, d, sigma, verbose)
   %PROJECTEDBACKTRACKINGSEARCH Find stepsize t get sufficient decrease for multidimensional objective along line
   
   %% Purpose:
-  % Find t to satisfy f(x+t*d)< f(x) - sigma/t*norm(x-P(x + t*d))^2
+  % Find t to satisfy f(x+t*d)< f(x) - sigma/t*norm(x-P(x - t*gradient))^2
   
   %% Input Definition:
   % f: function handle of type [value, gradient] = f(x).
@@ -22,7 +22,7 @@ function [t] = projectedBacktrackingSearch(f, P, x, d, sigma, verbose)
   %% Test cases:
   % [t]=projectedBacktrackingSearch(@(x)simpleValleyObjective(x,[1;1]), @(x)projectionInBox(x,[-2;1],[2;2],1.0e-6),[1;1], [-1.99;0], 0.5, true);
   % should return
-  % t=0.0625;
+  % t=0.5;
   
   %% Input verification:
   
@@ -53,7 +53,7 @@ function [t] = projectedBacktrackingSearch(f, P, x, d, sigma, verbose)
   phi=@(t)(f(P(xk+t*d)));
   f_x = phi(0);
      
-  while (phi(t) > f_x - sigma/t * norm(xk - P(xk + t* d))^2 ) 
+  while (phi(t) > f_x - sigma/t * norm(xk - P(xk - t* gradient))^2 ) 
    t = t * beta;
   end 
    

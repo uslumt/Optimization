@@ -108,7 +108,7 @@ while norm(x_k - P(x_k - gradient) ) > eps
   t_k = projectedBacktrackingSearch(f, P, x_k, d_k, sigma);
   x_k = P(x_k + t_k * d_k);
   
-  countIter=countIter+1;
+ 
  endwhile
 xmin = x_k
 
