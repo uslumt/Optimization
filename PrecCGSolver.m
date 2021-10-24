@@ -71,7 +71,7 @@ function [x] = PrecCGSolver(A,b,delta,verbose)
     r= rold + t*Ad;
     beta = r'*LLTSolver(L , r)/( rold'*LLTSolver(L, rold) );
     d = - LLTSolver(L , r) + beta*d;
-    couter = countIter++
+    
   endwhile
 
  
