@@ -65,20 +65,20 @@ end
 x_k = x0;
 
 while norm(gradient) > eps
-  
-  B = hessian
-  d = PrecCGSolver(B, -gradient, 1.0e-6)
+  [value, gradient, hessian] = f(x_k);
+  B = hessian;
+  d = PrecCGSolver(B, -gradient, 1.0e-6);
   
   if gradient'*d >=0
-    d = -gradient
+    d = -gradient;
   endif
   
-    t = WolfePowellSearch(f, x_k, d, 1.0e-3, 1.0e-2)
+  t = WolfePowellSearch(f, x_k, d, 1.0e-3, 1.0e-2);
   
-  x_k = x_k + t*d
-  [value, gradient, hessian] = f(x_k)
+  x_k = x_k + t*d;
+  [value, gradient, hessian] = f(x_k);
 endwhile
-xmin = x_k
+xmin =x_k
 
 if verbose
     [value, gradient] = f(xmin);

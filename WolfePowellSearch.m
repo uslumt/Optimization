@@ -69,52 +69,52 @@ function [t] = WolfePowellSearch(f, x, d, sigma, rho, verbose)
 %Complete the code
  
   function w1 = W1(t)
-    w1 = f(x + t*d) <= f(x) + t*sigma*gradient'*d
+    w1 = f(x + t*d) <= f(x) + t*sigma*gradient'*d;
   end
   
   function w2=W2(t)
-    [value1, gradient1] = f(x+t*d)
-    w2 = gradient1'*d  >= rho*gradient'*d
+    [value1, gradient1] = f(x+t*d);
+    w2 = gradient1'*d  >= rho*gradient'*d;
   end
   
-  t = 1
+  t = 1;
   
   if W1(t) == false
-    t = t/2
+    t = t/2;
     while W1(t) == false
-      t = t/2
+      t = t/2;
     endwhile
-    t_min = t
-    t_max = 2*t
+    t_min = t;
+    t_max = 2*t;
      
   elseif W2(t) == true
-    t_opt = t
+    t_opt = t;
   return ;
   
   else 
-  t = 2*t
+  t = 2*t;
   
   while W1(t) == true
-    t = 2*t
+    t = 2*t;
    endwhile
    
-   t_min = t/2
-   t_max = t
+   t_min = t/2;
+   t_max = t;
    
  endif
- t = t_min
+ t = t_min;
  
    while W2(t) == false
-     t = (t_min + t_max)/2
+     t = (t_min + t_max)/2;
      
      if W1(t) == true
-       t_min = t
+       t_min = t;
      else
-       t_max = t
+       t_max = t;
      endif
    endwhile
    
-  t  = t_min
+  t  = t_min;
    
   if verbose
     disp(sprintf('WolfePowellSearch terminated with t=%d',t));
